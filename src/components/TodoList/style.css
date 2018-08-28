@@ -1,0 +1,27 @@
+.card {
+    width: 300px;
+    height: 200px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 2rem;
+}
+
+.todo-input {
+    width: 80%;
+}
+
+.first-line {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.25rem;
+}
+
+.button {
+    background: #ececec;
+    color: black;
+    border: 1px solid black;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 3px;
+}
