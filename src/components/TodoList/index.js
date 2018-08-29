@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Input, Button } from 'reactstrap';
 import './style.css';
 
 class TodoList extends Component {
@@ -25,21 +26,24 @@ class TodoList extends Component {
     handleClick = () => {
         const values = {
             priority: this.state.priority,
-            inputValue: this.state.inputValue,
+            name: this.state.inputValue,
         }
         this.props.onAdd(values);
     }
 
     render() {
         return (
-            <div className="card">
-                <div className="first-line">
-                    <input value={this.state.inputValue} onInput={this.handleInput} className="todo-input" />
-                    <select value={this.state.priority} onChange={this.handleChange} className="priority">
+            <div className="card p-5">
+                <div className="first-line row">
+                    <Input value={this.state.inputValue} onInput={this.handleInput} className="todo-input mr-1 col-sm-6" />
+                    <Input type="select" 
+                           value={this.state.priority} 
+                           onChange={this.handleChange} 
+                           className="priority mr-1 col-sm-2">
                         <option value="high">High</option>
                         <option value="low">Low</option>
-                    </select>
-                    <button onClick={this.handleClick} className="button">Add</button>
+                    </Input>
+                    <Button color="success" onClick={this.handleClick} className="col-sm-3">Add</Button>
                 </div>
                 {this.props.name}
                 {/* {this.state.inputValue} - {this.state.priority} */}
