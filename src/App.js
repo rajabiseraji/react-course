@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card} from 'reactstrap';
+import { Card , Label, Input} from 'reactstrap';
 import logo from './logo.svg';
 import './App.css';
 import TodoList from './components/TodoList/index';
@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
     this.state = {
       inputs: [],
+      searchResults: [],
     }
   }
 
@@ -37,11 +38,49 @@ class App extends Component {
     )
   }
 
+  renderSearchResults = () => {
+    if(this.state.inputs.length === 0)
+      return null;
+    
+    
+    let todoItems =  this.state.searchResults.map((todo) => {
+      return (
+        <TodoItem key={todo.name} todo={todo} />
+      );
+    });
+    return (
+      <Card className="p-2 m-5 w-50"> 
+        {todoItems}
+      </Card>
+    )
+  }
+
   addHandler = (obj) => {
     let tempInputs = this.state.inputs;
     tempInputs.push(obj);
+    tempInputs.sort(function (a, b) {
+        if(a.priority === 'high' && b.priority !== 'high')
+          return 1;
+        else if(b.priority === 'high')
+          return -1;
+        
+
+          return 0;
+        
+    })
     this.setState({
       inputs: tempInputs,
+    });
+  }
+
+  searchInputHandler = (event) => {
+    const searchQuery = event.target.value;
+    let searchResults = this.state.inputs;
+    searchResults = searchResults.filter(function (todo) {
+      return todo.name.includes(searchQuery);
+    });
+    this.setState({
+      searchResults: searchResults,
     });
   }
 
@@ -58,8 +97,13 @@ class App extends Component {
               <TodoList onAdd={this.addHandler} name="I'm a prop" />
             </div>
           </div>
+          <div className="m-2 p-2 card">
+            <Label for="searchBox">Search</Label>
+            <Input type="search" onInput={this.searchInputHandler} name="search" id="searchBox" placeholder="Search something ..." />
+            {this.renderSearchResults()}
+          </div>
           {this.renderTodoList()}
-          <Timer time="10" />
+          -----------------
         </div>
       </div>
     );

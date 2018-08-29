@@ -7,7 +7,7 @@ class TodoItem extends Component {
 
     render() {
         return (
-            <div className="item">
+            <div className="item p-2 my-1">
                 <Badge color="secondary" className="name mx-2">{this.props.todo.name}</Badge>
                 <Badge color="secondary" className="priority mx-2">{this.props.todo.priority}</Badge>
                 <button className="button">Delete</button>
@@ -17,7 +17,7 @@ class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-    todo: PropTypes.object,
+    todo: PropTypes.object.isRequired,
 }
 
 TodoItem.defaultProps = {
