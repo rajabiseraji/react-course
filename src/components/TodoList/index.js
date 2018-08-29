@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'reactstrap';
+import uuidv1 from 'uuid';
 import './style.css';
 
 class TodoList extends Component {
@@ -25,6 +26,7 @@ class TodoList extends Component {
 
     handleClick = () => {
         const values = {
+            id: uuidv1(),
             priority: this.state.priority,
             name: this.state.inputValue,
         }

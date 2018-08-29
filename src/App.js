@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import TodoList from './components/TodoList/index';
 import TodoItem from './components/TodoItem/index';
-
+import Timer from './components/Timer/index';
 
 class App extends Component {
   constructor(props) {
@@ -24,18 +24,17 @@ class App extends Component {
     if(this.state.inputs.length === 0)
       return null;
     
-    let todoItemElems = [];
-    for (let index = 0; index < this.state.inputs.length; index++) {
-      const element = this.state.inputs[index];
-      todoItemElems.push(<TodoItem key={element.name} todo={element} />)
-    };
-    return todoItemElems;
-
-    return this.state.inputs.map((todo) => {
+    
+    let todoItems =  this.state.inputs.map((todo) => {
       return (
         <TodoItem key={todo.name} todo={todo} />
       );
-    })
+    });
+    return (
+      <Card className="p-2 m-5 w-50"> 
+        {todoItems}
+      </Card>
+    )
   }
 
   addHandler = (obj) => {
@@ -60,9 +59,7 @@ class App extends Component {
             </div>
           </div>
           {this.renderTodoList()}
-          {/* <Card className="p-2 m-5 w-50"> 
-            {this.renderTodoList()}
-          </Card> */}
+          <Timer time="10" />
         </div>
       </div>
     );
